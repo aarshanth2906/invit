@@ -5,14 +5,14 @@ const path = require("node:path");
 const invitationPath = path.join(__dirname, "index.html");
 const port = Number(process.env.PORT) || 5173;
 
+const staticFiles = {
+  "/favicon.svg": { file: "favicon.svg", type: "image/svg+xml" },
+  "/favicon.png": { file: "favicon.png", type: "image/png" },
+  "/apple-touch-icon.png": { file: "apple-touch-icon.png", type: "image/png" }
+};
+
 const server = http.createServer((request, response) => {
   const pathname = new URL(request.url, "http://localhost").pathname;
-
-  const staticFiles = {
-    "/favicon.svg": { file: "favicon.svg", type: "image/svg+xml" },
-    "/favicon.png": { file: "favicon.png", type: "image/png" },
-    "/apple-touch-icon.png": { file: "apple-touch-icon.png", type: "image/png" }
-  };
 
   if (staticFiles[pathname]) {
     const { file, type } = staticFiles[pathname];
